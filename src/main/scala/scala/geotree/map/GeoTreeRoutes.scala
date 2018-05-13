@@ -3,9 +3,8 @@ package scala.geotree.map
 
 import scala.geotree.map.tree.FractalArea.Coordinates
 import scala.concurrent.{ExecutionContext, Future}
-import scala.geotree.Place
+import scala.geotree.{Place, WithCoordinates}
 import scala.geotree.map.tree.GeoTree
-import scala.geotree.map.tree.GeoTree.WithCoordinates
 
 class GeoTreeRoutes[T](tree: GeoTree[T], config: GeoTreeConfig)(implicit ex: ExecutionContext) {
   type Longitude = geotree.Longitude

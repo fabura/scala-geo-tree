@@ -2,8 +2,8 @@ package scala.geotree.map.tree
 
 import org.scalatest.{FlatSpec, Matchers}
 
+import scala.geotree.WithCoordinates
 import scala.geotree.map.tree.FractalArea.Coordinates
-import scala.geotree.map.tree.GeoTree.WithCoordinates
 import scala.util.Random
 
 
@@ -37,7 +37,7 @@ class GeoTreeTest extends FlatSpec with Matchers {
 
   it should "store millions of points" in {
 
-    val cities = 10
+    val cities = 100
     val points = 10000
     val tree = new GeoTree[String]
 
@@ -49,18 +49,18 @@ class GeoTreeTest extends FlatSpec with Matchers {
         Tuple3(cityLat + Random.nextInt(100000) - 50000, cityLng + Random.nextInt(100000) - 50000, s"${cityName}_$j")
       }
 
-      println(s"$cityName: $cityLat, $cityLng")
+      //      println(s"$cityName: $cityLat, $cityLng")
       locs.foreach(point => tree.insert(Coordinates(point._1, point._2), point._3))
 
       val startTime = System.currentTimeMillis()
       implicit val ord = ordering(Coordinates(cityLat, cityLng))
       val str = tree.getClosestPoints(Coordinates(cityLat, cityLng)).take(10).mkString(",")
       val endTime = System.currentTimeMillis()
-      println(endTime - startTime)
-      println(str)
+      //      println(endTime - startTime)
+      //      println(str)
     }
-
-    println(tree.toString)
+    assert(tree.size() == 1000000)
+    //    println(tree.toString)
 
   }
 
@@ -81,7 +81,7 @@ class GeoTreeTest extends FlatSpec with Matchers {
     tree.getClosestPoints(Coordinates(startX, startY)).zipWithIndex.zip(points.iterator).foreach {
       case ((WithCoordinates(receivedCoord, angleReceived), index), (initialCoord, angle)) => {
         assert(receivedCoord == initialCoord, s"angle = $angle, $angleReceived, $receivedCoord, $initialCoord")
-//        assert(angleReceived == index)
+        //        assert(angleReceived == index)
         assert(angleReceived == angle)
       }
     }

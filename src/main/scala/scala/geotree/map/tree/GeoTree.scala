@@ -1,13 +1,7 @@
 package scala.geotree.map.tree
 
+import scala.geotree.WithCoordinates
 import scala.geotree.map.tree.FractalArea.{Coordinates, Index}
-import scala.geotree.map.tree.GeoTree.WithCoordinates
-
-object GeoTree {
-
-  case class WithCoordinates[T](coordinates: Coordinates, obj: T)
-
-}
 
 class GeoTree[T] {
 
@@ -134,7 +128,6 @@ class IntermediateNode[T](val start: Index, val capacity: Index) extends GeoTree
       Coordinates(startCoordinates.x + distanceFromStartToClosestPoint._1, startCoordinates.y + distanceFromStartToClosestPoint._2)
     }
 
-    // todo check that items came in increasing order
     def childrenIterator =
       if (index - start < capacity && (index - start) >= 0) { // within our square
         val nearest = getIndexInChildren(index)

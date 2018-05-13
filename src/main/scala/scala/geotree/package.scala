@@ -1,7 +1,7 @@
 package scala
 
-import scala.concurrent.Future
 import scala.geotree.DistUnits.Measurement
+import scala.geotree.map.tree.FractalArea.Coordinates
 import scala.util.{Failure, Success, Try}
 
 package object geotree {
@@ -51,6 +51,7 @@ package object geotree {
   type Longitude = Degree
   type Latitude = Degree
 
+  case class WithCoordinates[T](coordinates: Coordinates, obj: T)
   case class Place(name: String, distance: Distance, longitude: Degree, latitude: Degree)
 
   object Place {

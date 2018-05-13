@@ -1,7 +1,7 @@
 package scala.geotree.map.tree
 
+import scala.geotree.WithCoordinates
 import scala.geotree.map.tree.FractalArea.Coordinates
-import scala.geotree.map.tree.GeoTree.WithCoordinates
 
 trait FastCheckIterator[T] extends Iterator[T] {
 
