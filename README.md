@@ -13,12 +13,24 @@ For instance, on my laptop it takes 0.7 seconds to find 10 points in radius 1000
 ### How to use
 
 ```scala
- import scala.geotree.map.tree.FractalArea.Coordinates
- import scala.geotree.map.tree._
- val tree = new GeoTree[String]
- tree.insert(Coordinates(1000, 4000))
 
+ import scala.geotree.map.tree.FractalArea.Coordinates
+ import scala.geotree.map.tre
+ val tree = new GeoTree[String]
+ val latitude = 45.44
+ val longitude = 56.67
+ val world = World.Earth
+ tree.insert(world.convertCoordinates(latitude, longitude))
+ ... put other points
+ 
+ val latitudeToSearch = 23.333
+ val longitudeToSearch = 45.666
+ val coordinates = world.convertCoordinates(latitudeToSearch,longitudeToSearch)
+ val iterator = tree.getClosestPoints(coordinates)(Ordering.by(c => world.distance(c, coordinates))
+ // iterator returns closest point in order of increasing distance from `coordanates`
 ```
+ 
+
 
 
 ### The limitations:
